@@ -13,9 +13,13 @@ class UserProfileScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'Profile',
         showBackButton: true,
+        actions: [
+          CopyLinkButton(link: DeepLinkHelper.getProfileLink(userId)),
+          const SizedBox(width: 16),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

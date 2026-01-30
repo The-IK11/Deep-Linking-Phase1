@@ -123,6 +123,8 @@ class ProductDetailsScreen extends StatelessWidget {
         ),
       ),
       actions: [
+        CopyLinkButton(link: DeepLinkHelper.getProductLink(productId)),
+        const SizedBox(width: 8),
         Container(
           margin: const EdgeInsets.only(right: 16),
           padding: const EdgeInsets.all(10),

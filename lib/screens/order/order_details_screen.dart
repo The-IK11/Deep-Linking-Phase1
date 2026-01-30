@@ -13,9 +13,13 @@ class OrderDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'Order Details',
         showBackButton: true,
+        actions: [
+          CopyLinkButton(link: DeepLinkHelper.getOrderLink(orderId)),
+          const SizedBox(width: 16),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),

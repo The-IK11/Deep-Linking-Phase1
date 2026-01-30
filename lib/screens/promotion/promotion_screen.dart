@@ -128,6 +128,11 @@ class PromotionScreen extends StatelessWidget {
         ),
       ),
       actions: [
+        CopyLinkButton(
+          link: DeepLinkHelper.getPromotionLink(promoId),
+          backgroundColor: Colors.white.withValues(alpha: 0.9),
+        ),
+        const SizedBox(width: 8),
         Container(
           margin: const EdgeInsets.only(right: 16),
           padding: const EdgeInsets.all(10),

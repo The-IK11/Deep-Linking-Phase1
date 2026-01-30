@@ -19,7 +19,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: const CustomAppBar(title: 'Settings', showBackButton: true),
+      appBar: CustomAppBar(
+        title: 'Settings',
+        showBackButton: true,
+        actions: [
+          CopyLinkButton(link: DeepLinkHelper.getSettingsLink()),
+          const SizedBox(width: 16),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(

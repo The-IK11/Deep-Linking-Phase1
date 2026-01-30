@@ -1,5 +1,123 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../theme/app_theme.dart';
+
+/// Helper class for deep link operations
+class DeepLinkHelper {
+  static const String baseUrl = 'https://deeplinkingtest.app';
+
+  static String getProductLink(String productId) => '$baseUrl/product/$productId';
+  static String getProfileLink(String userId) => '$baseUrl/profile/$userId';
+  static String getOrderLink(String orderId) => '$baseUrl/order/$orderId';
+  static String getPromotionLink(String promoId) => '$baseUrl/promotion/$promoId';
+  static String getSettingsLink() => '$baseUrl/settings';
+  static String getHomeLink() => baseUrl;
+
+  static void copyToClipboard(BuildContext context, String link) {
+    Clipboard.setData(ClipboardData(text: link));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Icon(Icons.check_circle, color: Colors.white, size: 20),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Link Copied!',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    link,
+                    style: const TextStyle(fontSize: 12, color: Colors.white70),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: AppColors.success,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+}
+
+/// Copy Link Button Widget
+class CopyLinkButton extends StatelessWidget {
+  final String link;
+  final bool showLabel;
+  final Color? backgroundColor;
+
+  const CopyLinkButton({
+    super.key,
+    required this.link,
+    this.showLabel = false,
+    this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (showLabel) {
+      return GestureDetector(
+        onTap: () => DeepLinkHelper.copyToClipboard(context, link),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: backgroundColor ?? Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 10,
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.link_rounded, color: AppColors.primary, size: 18),
+              const SizedBox(width: 6),
+              Text(
+                'Copy Link',
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    
+    return GestureDetector(
+      onTap: () => DeepLinkHelper.copyToClipboard(context, link),
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: backgroundColor ?? Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: const Icon(Icons.link_rounded, size: 22),
+      ),
+    );
+  }
+}
 
 class GradientCard extends StatelessWidget {
   final Widget child;

@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildHeader(),
+              _buildHeader(context),
               const SizedBox(height: 24),
               _buildWelcomeCard(context),
               const SizedBox(height: 28),
@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -74,6 +74,11 @@ class HomeScreen extends StatelessWidget {
         ),
         Row(
           children: [
+            CopyLinkButton(
+              link: DeepLinkHelper.getHomeLink(),
+              showLabel: false,
+            ),
+            const SizedBox(width: 12),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
