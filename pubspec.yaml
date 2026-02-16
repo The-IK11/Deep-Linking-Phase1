@@ -7,10 +7,11 @@ environment:
   sdk: ^3.9.2
 
 dependencies:
+  go_router: ^17.1.0
   app_links: ^7.0.0
+  
   flutter:
     sdk: flutter
-  go_router: ^17.1.0
 
 dev_dependencies:
   flutter_test:
